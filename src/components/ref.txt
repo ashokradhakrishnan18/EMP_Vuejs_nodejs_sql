@@ -1,0 +1,981 @@
+<template>
+
+<div id="app">
+
+  <v-app id="inspire">
+
+
+    <v-content >
+<!-- <v-img  class="pic"
+        
+
+    src="https://images.unsplash.com/photo-1578592325919-ca966e981cb5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80"
+  > -->
+<div class="bgimg-1">
+      <v-container
+        fluid
+        fill-height
+      >
+        <v-layout
+          align-center
+          justify-center
+        >
+          <v-flex
+            xs12
+            sm10
+            md10
+            lg8
+            xl5
+          >
+            <v-card :elevation="24" class="card" >
+
+<v-row>
+         <v-col cols="12" xl="6" sm="6" lg="6" class="leftop">
+ <br/>
+<v-card-text   align="center" justify="center" style="margin-top:7%">
+  <v-img src="../assets/thinkbig.png"  width="200">
+</v-img>
+       <v-responsive
+            class="mx-auto title font-weight-small text mt-4"
+            max-width="320" 
+          >
+<strong> <span style="color:#4285f4">Think</span><span style="color:#f40000">BiG</span><span style="color:#4285f4"> Software Solutions Private Limited </span></strong> in 2016, with the goal of being the company of right choice for clients, talents and solution providers.          </v-responsive>
+
+</v-card-text>
+
+</v-col>
+<v-col cols="12" xl="6" sm="6" lg="6" >
+ <v-layout
+          align-center
+          justify-center
+        >
+<v-divider vertical class="light-blue darken-4"></v-divider>
+
+              <v-card-text style="margin-top:7%;width:100%" >
+                <v-form  >
+<v-text-field
+class="py-5"
+label="EMAIL"
+name="email"
+prepend-icon="mdi-email"
+type="text"
+color="blue"/>
+
+<v-text-field
+class="py-1"
+id="password"
+label="PASSWORD" 
+name="password"
+prepend-icon="mdi-lock"
+type="password"
+color="blue" />
+<a>
+<h3 class=" mt-3  text-center" style="color:#2196F3;"> FORGET PASSWORD? </h3></a>
+       <br/>
+<div class="text-center mt-3" >
+<v-btn  to="/home" large color="blue"  width="70%" dark>  Login</v-btn>
+</div>
+<br/><br/><br/>
+     </v-form>   
+</v-card-text>
+ </v-layout>
+</v-col>
+</v-row>
+
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
+<!-- </v-img> -->
+</div>
+    </v-content>
+
+  </v-app>
+
+</div>
+
+
+
+</template>
+
+<style >
+.hidden-sm-and-down .v-icon {
+    color: white !important;
+}
+.card{
+border-radius: 15px !important;
+opacity: 0.93;
+}
+
+.text{
+color: grey;
+}
+.bgimg-1, .bgimg-2, .bgimg-3 {
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.bgimg-1 {
+  background-image: url("https://images.unsplash.com/photo-1578592325919-ca966e981cb5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80");
+  height: 100%;
+}
+</style>
+
+
+
+
+
+<template>
+<div id="app">
+
+  <v-app id="inspire">
+<appbar @toggle-drawer="$refs.drawer.drawer = !$refs.drawer.drawer" ref="name" v-bind:items="breadcombs"></appbar>
+
+
+<navbar ref="drawer"></navbar>
+     
+     
+      <v-main class="grey lighten-2 ">
+                          
+
+       <v-container class="mt-8 my-0">
+              <v-card light
+        class="mb-n16 mx-6 rounded-lg" style="z-index:1"
+        elevation="8"
+        height="90"
+        max-width="85"
+      >  
+     <div class="text-center rounded-lg">
+    <v-avatar 
+      tile height="90" width="85"
+      class="visitor_innercard rounded-lg"
+    >
+      <v-icon dark size="40">
+        mdi-account-question
+      </v-icon>
+    </v-avatar>
+     </div> </v-card>   
+    <v-card class="white pa-5 rounded-lg">
+        <v-row  class="mt-8">
+        
+ 
+          <v-col cols="12" md="7">
+          <v-card > 
+        
+        
+        <v-card-text class="py-0" >
+            <v-form  ref="form"
+    v-model="valid" 
+   >
+              
+                
+                <v-row >
+                <v-col cols="12" md="6">
+ <h4> Name </h4>
+
+                <v-text-field
+                 v-model="name"
+                 :rules="namerules"
+                label="Name"
+                type="text"
+                color="blue"
+                
+               />
+                </v-col>
+                <v-col cols="12" md="6">
+                 
+ <h4> Date Of Birth </h4>
+                <v-menu
+          ref="menu"
+          v-model="menu"
+          :close-on-content-click="false"
+          :return-value.sync="date"
+          transition="scale-transition"
+          offset-y
+          min-width="290px"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              v-model="date"
+              label="DOB"
+              prepend-inner-icon="mdi-calendar"
+              readonly
+              v-bind="attrs"
+              v-on="on" 
+               :rules="daterules"
+            
+            ></v-text-field>
+          </template>
+          <v-date-picker v-model="date" no-title scrollable>
+            <v-spacer></v-spacer>
+            <v-btn text color="primary" @click="menu = true">Cancel</v-btn>
+            <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+
+          </v-date-picker>
+        </v-menu>
+                </v-col>
+                </v-row>
+               
+
+
+
+                
+                 <v-row>
+                <v-col cols="12" md="12">
+                  <h4> Address </h4>
+                 <v-text-field
+                label="Address"
+               v-model="address"
+                type="text"
+                color="blue" 
+                 :rules="aadressrules"
+               />
+                </v-col>
+                 <v-col md="6">
+                 <h4> Age </h4>
+                 
+                
+                <v-text-field
+                 v-model="age"
+              :rules="agerules"
+                label="Age"
+                maxlength="2"
+                type="number"
+                color="blue" 
+               />
+                </v-col>
+              <v-col md="6">
+                 <h4> Passed Out </h4>
+                 <v-select
+                :items="['2020','2019','2018','2017','2016','2015','2014','2013','2012','2011'
+                ,'2010','2009','2008','2007','2006','2005','2004','2003','2002','2001']"
+                label="Select Passed out Year"
+                v-model="passedout"
+                type="text"
+                color="blue"
+                :rules="passedoutrules"
+               />
+              </v-col>
+                </v-row>
+                
+
+                <v-row>
+              <v-col cols="6" md="3">
+                 <h4> Qualification </h4>
+                 <v-select
+                :items="['UG','PG']"
+                label=" Qualification"
+                v-model="qualification"
+                type="text"
+                color="blue"
+                :rules="qualificationrules"
+               />
+              </v-col>
+                
+<v-col cols="6" md="3">
+                 <h4> Degree </h4>
+                 <v-select
+                :items="['Enginnering','Arts & Science','Others']"
+                label="Select Degree"
+                v-model="degree"
+                type="text"
+                color="blue"
+               :rules="degreerules"
+                />
+              </v-col>
+                 
+              <v-col md="6">
+                <h4> Degree/Course </h4>
+                 <v-text-field
+                label="Enter the Degree/Course"
+              v-model="course"
+                type="text"
+                color="blue" 
+                :rules="courserules"
+               />
+              </v-col>
+                </v-row>
+
+                <v-row>
+              <v-col md="6">
+                <h4> Experience Year </h4>
+                 <v-select
+                :items="['Fresher','1 year','2 year','3 year','4 year','5 year','6 year',
+                '7 year','8 year','9 year','10 year','11 year','12 year','13 year','14 year','15 year']"
+                label="Experience year"
+               v-model="experience"
+                type="text"
+                color="blue"
+               :rules="experiencerules"
+               />
+              </v-col>
+
+                
+               
+               <v-col md="6">
+                 <h4> Experience Month </h4>
+               <v-select
+                :items="['none','0 to 3 month','3 to 6 month','6 to 9 month','9 to 12 month']"
+                label="Experience month"
+               v-model="experiencemonth"
+                type="text"
+                color="blue"
+                :rules="experiencemonthrules"
+                 />
+                </v-col>
+                </v-row>
+                             <v-row>
+                 <v-col cols="12" md="6">
+                   <h4> Contact Number </h4>
+                <v-text-field
+                v-model="contact"
+              :rules="contactrules"
+                label="Enter your Contact Number"
+              
+                type="number"
+                color="blue"
+                required
+                 />
+              </v-col>
+         
+                 <v-col cols="12" md="6">
+                  <h4> Email </h4>
+               <v-text-field
+              v-model="email"
+              :rules="emailrules"
+              label="E-mail"
+              required
+            
+            ></v-text-field>
+                          </v-col>
+                </v-row>
+      <v-row>
+                 <v-col md="12">
+                   <h4> Aadhar ID </h4>
+                <v-text-field
+                label="Enter your Adhar Id "
+                 v-model="aadhar"
+              :rules="aadharrules"
+                type="number"
+                       min="0"
+                     max=5
+    maxlength="0"
+                color="blue"
+                required
+                 />
+                 </v-col>
+                </v-row>
+
+            </v-form>
+        </v-card-text>
+      
+          </v-card>
+        </v-col>
+
+           <v-col cols="12" md="5">
+          <v-card class="elevator-9"> 
+     
+        <v-card-text class="py-0">
+            <v-form  ref="form1"
+        v-model="valid1"
+        >
+ 
+           
+                <v-row>
+                 <v-col cols="12" md="8">
+                   <h4> Current Employment </h4>
+                <v-text-field
+                label="Enter your Company Name"
+                 v-model="current"
+                :rules="currentrules"
+                type="text"
+                color="blue"
+                required
+                />
+              </v-col>
+             
+              <v-col cols="12" md="4">
+                   <h4> Joined Date </h4>
+                <v-menu
+          ref="menu2"
+          v-model="menu2"
+          :close-on-content-click="false"
+          :return-value.sync="date"
+          transition="scale-transition"
+          offset-y
+          max-width="290px"
+          min-width="290px"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              v-model="date2"
+              label="Joined Date"
+              prepend-icon="mdi-calendar"
+              readonly
+              v-bind="attrs"
+              v-on="on"
+   :rules="date2rules"
+            ></v-text-field>
+          </template>
+          <v-date-picker
+            v-model="date2"
+            type="month"
+            no-title
+            scrollable
+          >
+            <v-spacer></v-spacer>
+            <v-btn
+              text
+              color="primary"
+              @click="menu2 = false"
+            >
+              Cancel
+            </v-btn>
+            <v-btn
+              text
+              color="primary"
+              @click="$refs.menu2.save(date)"
+            >
+              OK
+            </v-btn>
+          </v-date-picker>
+        </v-menu>
+                 </v-col>
+                </v-row>
+                
+      <v-row>
+                 <v-col md="12">
+                   <h4> Previous Employment 1</h4>
+                <v-text-field
+                label="Enter your previous company name"
+                 v-model="previous"
+                :rules="previousrules"
+                type="text"
+                color="blue"
+                required
+                />
+              </v-col>
+                </v-row>
+
+                <v-row>
+            <v-col cols="12" md="6">
+                 
+          <h4> Joined Date </h4>
+   <v-menu
+          ref="menu3"
+          v-model="menu3"
+          :close-on-content-click="false"
+          transition="scale-transition"
+          offset-y
+          max-width="290px"
+          min-width="290px"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              v-model="date3"
+              label="Joined Date"
+              prepend-icon="mdi-calendar"
+              readonly
+              v-bind="attrs"
+              v-on="on"
+   :rules="date3rules"
+            ></v-text-field>
+          </template>
+          <v-date-picker
+            v-model="date3"
+            type="month"
+            no-title
+            scrollable
+          >
+            <v-spacer></v-spacer>
+            <v-btn
+              text
+              color="primary"
+              @click="menu3 = false"
+            >
+              Cancel
+            </v-btn>
+            <v-btn
+              text
+              color="primary"
+              @click="$refs.menu3.save(date)"
+            >
+              OK
+            </v-btn>
+          </v-date-picker>
+        </v-menu>
+                </v-col>
+                         <v-col cols="12" md="6">
+                 
+          <h4> Relieved Date </h4>
+       <v-menu
+          ref="menu4"
+          v-model="menu4"
+          :close-on-content-click="false"
+          transition="scale-transition"
+          offset-y
+          max-width="290px"
+          min-width="290px"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              v-model="date4"
+              label="Relieved Date"
+              prepend-icon="mdi-calendar"
+              readonly
+              v-bind="attrs"
+              v-on="on"
+   :rules="date4rules"
+            ></v-text-field>
+          </template>
+          <v-date-picker
+            v-model="date4"
+            type="month"
+            no-title
+            scrollable
+          >
+            <v-spacer></v-spacer>
+            <v-btn
+              text
+              color="primary"
+              @click="menu4 = false"
+            >
+              Cancel
+            </v-btn>
+            <v-btn
+              text
+              color="primary"
+              @click="$refs.menu4.save(date)"
+            >
+              OK
+            </v-btn>
+          </v-date-picker>
+        </v-menu>
+                </v-col>
+                
+                </v-row>
+                <v-row>
+                 <v-col md="6">
+                
+                 <v-select
+                :items="['Hr','Manager']"
+                label="Select"
+                v-model="selecthm"
+                type="text"
+                color="blue"
+                :rules="selecthmrules"
+               />
+              </v-col>
+              <v-col md="6"> 
+               
+                <v-text-field
+                v-model="contact1hm"
+              :rules="contact1hmrules"
+                label="Enter their Phone Number"
+              
+                type="number"
+                color="blue"
+                required
+                 />
+              </v-col>
+                </v-row>
+                 
+  <v-row>
+                 <v-col md="12">
+                   <h4> Previous Employment 2</h4>
+                <v-text-field
+                label="Enter your previous company name"
+                 v-model="previous2"
+                :rules="previous2rules"
+                type="text"
+                color="blue"
+                required
+                />
+              </v-col>
+                </v-row>
+
+                <v-row>
+            <v-col cols="12" md="6">
+                 
+          <h4> Joined Date </h4>
+   <v-menu
+          ref="menu5"
+          v-model="menu5"
+          :close-on-content-click="false"
+          transition="scale-transition"
+          offset-y
+          max-width="290px"
+          min-width="290px"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              v-model="date5"
+              label="Joined Date"
+              prepend-icon="mdi-calendar"
+              readonly
+              v-bind="attrs"
+              v-on="on"
+   :rules="date5rules"
+            ></v-text-field>
+          </template>
+          <v-date-picker
+            v-model="date5"
+            type="month"
+            no-title
+            scrollable
+          >
+            <v-spacer></v-spacer>
+            <v-btn
+              text
+              color="primary"
+              @click="menu5 = false"
+            >
+              Cancel
+            </v-btn>
+            <v-btn
+              text
+              color="primary"
+              @click="$refs.menu5.save(date)"
+            >
+              OK
+            </v-btn>
+          </v-date-picker>
+        </v-menu>
+                </v-col>
+                         <v-col cols="12" md="6">
+                 
+          <h4> Relieved Date </h4>
+       <v-menu
+          ref="menu6"
+          v-model="menu6"
+          :close-on-content-click="false"
+          transition="scale-transition"
+          offset-y
+          max-width="290px"
+          min-width="290px"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-text-field
+              v-model="date6"
+              label="Relieved Date"
+              prepend-icon="mdi-calendar"
+              readonly
+              v-bind="attrs"
+              v-on="on"
+   :rules="date6rules"
+            ></v-text-field>
+          </template>
+          <v-date-picker
+            v-model="date6"
+            type="month"
+            no-title
+            scrollable
+          >
+            <v-spacer></v-spacer>
+            <v-btn
+              text
+              color="primary"
+              @click="menu6 = false"
+            >
+              Cancel
+            </v-btn>
+            <v-btn
+              text
+              color="primary"
+              @click="$refs.menu6.save(date)"
+            >
+              OK
+            </v-btn>
+          </v-date-picker>
+        </v-menu>
+                </v-col>
+                
+                </v-row>
+                <v-row>
+                 <v-col md="6">
+                
+                 <v-select
+                :items="['Hr','Manager']"
+                label="Select"
+                v-model="select2hm"
+                type="text"
+                color="blue"
+                :rules="select2hmrules"
+               />
+              </v-col>
+              <v-col md="6"> 
+               
+                <v-text-field
+                v-model="contact2hm"
+              :rules="contact2hmrules"
+                label="Enter their Phone Number"
+              
+                type="number"
+                color="blue"
+                required
+                 />
+              </v-col>
+                </v-row>
+                 
+            
+
+                 
+          
+
+
+
+                 
+
+
+
+           <v-row>
+  <v-col md="6">
+                   <h4> Domain </h4>
+                <v-text-field
+                label="Enter your Domain"
+                 v-model="domain"
+                :rules="domainrules"
+                type="text"
+                color="blue"
+                required
+                />
+              </v-col>
+              <v-col md="6">
+                 <h4> Referred by </h4>
+               <v-select
+                :items="['Indeed','Nakuri','Forum','HR','Others']"
+                label="Referred by"
+               v-model="referrence"
+                type="text"
+                color="blue"
+                :rules="referrencerules"
+                 />
+                </v-col>
+              </v-row>
+            </v-form>
+        </v-card-text>
+   
+          </v-card>
+           </v-col>
+        </v-row>
+        
+  
+       
+        <div align="center" class="text-right">
+          <v-btn
+      :disabled="!valid || !valid1"
+      color="success"
+      class="mr-4"
+      @click="validate"
+    >
+      save
+    </v-btn>
+        </div>
+    </v-card>
+        </v-container>
+    
+
+      </v-main>
+       <!-- </v-img> -->
+        
+   </v-app>
+</div>
+</template>
+<style>
+
+</style>
+<script>
+import appbar from './content/appbar'
+import navbar from './content/navbar'
+
+
+  export default {
+     name: 'Applicant Information',
+     components:{
+        navbar,
+        appbar,
+        
+     },
+    data: () => ({
+       valid: false,
+ valid1: false,
+      date: null,
+      date1:null,
+           date2:null,
+      date3:null,
+      date4:null,
+      date5:null,
+      date6:null,
+
+        drawer: null,
+    menu: false,
+    menu1:false,
+  menu2:false,
+ menu3:false,
+ menu4:false,
+ menu5:false,
+ menu6:false,
+
+    modal: false,
+ breadcombs: [
+        {
+          text: 'Applicant Details',
+          disabled: true,
+          href: '#/applicant',
+        },
+      
+      ],
+     email: '',
+  emailrules: [
+        v => !!v || 'E-mail is Required',
+        v => /.+@+./.test(v) || 'E-mail must be valid',
+      ],
+       name: '',
+  namerules: [
+        v => !!v || 'Name is Required',
+         v =>  /^[A-Za-z]+$/.test(v) || 'Name must be character',
+        
+      ],
+        contact:"",
+       contactrules: [
+        v => !!v || 'Contact is Required',
+        v => v.length == 10 || 'Contact must  be equal to  10 numbers',
+      ],
+        aadhar:"",
+       aadharrules: [
+        v => !!v || 'Aadhar is Required',
+        v => v.length == 16 || 'Aadhar must  be  16 numbers',
+        
+      ],  
+      age:"",
+      agerules: [
+        v => !!v || 'Age is Required',
+        v => v <=50 || 'Enter valid age',
+      ],
+        aadress:"",
+       aadressrules: [
+        v => !!v || 'Address is Required',
+        
+      ],
+       
+       daterules: [
+        v => !!v || 'Date-of-Birth is Required',
+        
+      ],
+     date2rules: [
+        v => !!v || 'Joined-Date is Required',
+        
+      ],
+ date3rules: [
+        v => !!v || 'Joined-Date is Required',
+        
+      ],
+ date4rules: [
+        v => !!v || 'Relieved-Date is Required',
+        
+      ],
+ date5rules: [
+        v => !!v || 'Joined-Date is Required',
+        
+      ],
+ date6rules: [
+        v => !!v || 'Relieved-Date is Required',
+        
+      ],
+       current:"",
+       currentrules: [
+        v => !!v || 'Company Name is Required',
+        
+      ],
+          domain:"",
+             domainrules: [
+        v => !!v || 'Domain is Required',
+        
+      ],
+         passedout:"",
+         passedoutrules: [
+        v => !!v || 'Passed-out is Required',
+        
+      ],
+       qualification:"",
+       qualificationrules: [
+        v => !!v || 'Qualification is Required',
+        
+      ],
+        degree:"",
+        degreerules: [
+        v => !!v || 'Degree is Required',
+        
+      ],
+      course:"",
+      courserules: [
+        v => !!v || 'Course is Required',
+        
+      ],
+        experience:"",
+       experiencerules: [
+        v => !!v || 'Experience year is Required',
+        
+      ],
+        experiencemonth:"",
+       experiencemonthrules: [
+        v => !!v || 'Experience month is Required',
+        
+      ],
+          referrence:"",
+       referrencerules: [
+        v => !!v || 'Referrence is Required',
+        
+      ],
+
+         previous:"",
+             previousrules: [
+        v => !!v || 'Previous Employment is Required',
+        
+      ],
+ selecthm:"",
+        selecthmrules: [
+        v => !!v || 'Please Select.',
+        
+      ],
+ contact1hm:"",
+        contact1hmrules: [
+        v => !!v || 'Contact is Required', 
+    v => v.length == 10 || 'Contact must  be equal to 10 numbers',
+      ],
+  previous2:"",
+             previous2rules: [
+        v => !!v || 'Previous Employment  is Required',
+        
+      ],
+ select2hm:"",
+        select2hmrules: [
+        v => !!v || 'Please Select',
+        
+      ],
+ contact2hm:"",
+        contact2hmrules: [
+        v => !!v || 'Contact is Required', 
+    v => v.length == 10 || 'Contact must  be equal to 10 numbers',
+      ],
+ 
+  }),
+
+   methods: {
+      validate () {
+        this.$refs.form.validate()
+         this.$refs.form1.validate()
+        
+      }
+      
+      },
+ 
+  
+  }
+
+</script>
+--------old applicant page
+
+

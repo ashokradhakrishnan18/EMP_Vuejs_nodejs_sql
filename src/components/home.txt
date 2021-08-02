@@ -1,0 +1,697 @@
+<template>
+<div id="app">
+  <v-app id="inspire">
+    <v-app id="inspire">
+      <v-navigation-drawer
+        v-model="drawer"
+        :clipped="$vuetify.breakpoint.lgAndUp"
+        app
+      >
+        <v-list dense>
+ <v-list-item two-line :class="miniVariant && 'px-0'">
+            <v-list-item-avatar>
+              <img src="https://i7.pngguru.com/preview/831/88/865/user-profile-computer-icons-user-interface-mystique.jpg">
+            </v-list-item-avatar>
+<v-list-item-title>Name</v-list-item-title>
+          
+          </v-list-item>
+
+           <v-divider></v-divider>
+          <template v-for="item in items">
+            <v-row
+              v-if="item.heading"
+              :key="item.heading"
+              align="center"
+            >
+              <v-col cols="6">
+                <v-subheader v-if="item.heading">
+                  {{ item.heading }}
+                </v-subheader>
+              </v-col>
+              <v-col
+                cols="6"
+                class="text-center"
+              >
+               
+              </v-col>
+            </v-row>
+
+            <v-list-group
+              v-else-if="item.children"
+              :key="item.text"
+              v-model="item.model"
+             :prepend-icon="item.model ? item.icon : item['icon-alt']"
+              append-icon=""
+            >
+
+              <template v-slot:activator>
+
+                <v-list-item-content>
+                  <v-list-item-title >
+                    {{ item.text }}
+                  </v-list-item-title>
+                </v-list-item-content>
+
+              </template>
+              <v-list-item
+                v-for="(child, i) in item.children"
+                :key="i"
+                link
+              >
+                <v-list-item-action v-if="child.icon">
+                  <v-icon >{{ child.icon }}</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title>
+                    {{ child.text }}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+
+            </v-list-group>
+    
+          </template>
+
+
+
+
+
+
+
+
+
+
+
+        </v-list>
+      </v-navigation-drawer>
+  
+      <v-app-bar
+        :clipped-left="$vuetify.breakpoint.lgAndUp"
+        app
+        color="#157eab"
+        dark
+      >
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-toolbar-title
+          style="width: 300px"
+          class="ml-0 pl-4"
+        >
+          <span class="hidden-sm-and-down">Home</span>
+        </v-toolbar-title>
+       
+        <v-spacer></v-spacer>
+    
+     
+        <v-btn
+          icon
+          large
+        >
+          <v-avatar
+            size="32px"
+            item
+          >
+            </v-avatar>
+        </v-btn>
+      </v-app-bar>
+     
+    
+      <v-dialog
+        v-model="dialog"
+        width="800px"
+      >
+       
+      </v-dialog>
+    </v-app>
+  </v-app>
+</div>
+</template>
+<script>
+export default {
+data () {
+      return {
+       dialog: false,
+    drawer: null,
+    items: [
+
+      {
+        icon: 'mdi-chevron-up',
+        'icon-alt': 'mdi-chevron-down',
+        text: 'Personal Details',
+        model: true,
+        children: [
+          { icon: 'mdi-account-key', text: 'Working Details' },
+ { icon: 'mdi-account-convert', text: 'Employee Details ' },
+        ],
+      },
+  {
+        icon: 'mdi-chevron-up',
+        'icon-alt': 'mdi-chevron-down',
+        text: 'Management System',
+        model: true,
+        children: [
+          { icon: 'mdi-laptop-mac', text: 'Leave Management System' },
+        ],
+      },
+ 
+{
+        icon: 'mdi-chevron-up',
+        'icon-alt': 'mdi-chevron-down',
+        text: ' Salary',
+        model: true,
+        children: [
+          { icon: 'mdi-cash-multiple', text: 'Salary Calculation' },
+        ],
+      },
+
+
+      {
+        icon: 'mdi-chevron-up',
+        'icon-alt': 'mdi-chevron-down',
+        text: 'TAX',
+        model: true,
+        children: [
+          { icon: 'mdi-bank', text: 'Income TAX File' },
+        ],
+      },
+  {
+        icon: 'mdi-chevron-up',
+        'icon-alt': 'mdi-chevron-down',
+        text: 'Interview',
+        model: true,
+        children: [
+          { icon: 'mdi-account-outline', text: 'Interview Details' },
+        ],
+      },
+    ],
+ 
+      }
+    },
+   }
+
+</script>
+
+<style>
+
+</style>
+
+
+
+
+
+
+home page with css design cards
+<template>
+<div id="app">
+
+  <v-app id="inspire">
+    <v-app id="inspire">
+<appbar @toggle-drawer="$refs.drawer.drawer = !$refs.drawer.drawer" ref="name" v-bind:items="breadcombs"></appbar>
+
+
+<navbar ref="drawer"></navbar>
+  <v-main class="grey lighten-3">
+
+        <v-container class="mt-8">
+   <v-row  class="mt-1">
+        <v-col
+          cols="12"
+          sm="6"
+          lg="3"
+        >
+ 
+<v-card light
+        class="mb-n16 mx-6 rounded-lg" style="z-index:1"
+        elevation="8"
+        height="90"
+        max-width="85"
+      > <div class="text-center rounded-lg">
+    <v-avatar class="avatar_hcard_1 rounded-lg"
+      tile height="90" width="85"
+    >
+      <v-icon dark size="40" >
+        mdi-account-circle
+      </v-icon>
+    </v-avatar>
+  </div>  </v-card>   <v-card
+        class="mx-1"
+        height="170"
+        max-width="400"
+      >
+
+    <div class="text-end pt-3 pr-3">
+     <p class="header_title">Employees</p>
+ <h3 class="text">10</h3>
+<div class="mt-8">
+<v-divider class="ml-4 "></v-divider>
+ <p class="text-center mt-2 sub_title">Total Number of Employees</p>
+</div>
+    </div>
+      </v-card>
+
+   </v-col>
+    <v-col
+          cols="12"
+          sm="6"
+          lg="3"
+        >
+<v-card light
+        class="mb-n16 mx-6 rounded-lg" style="z-index:1"
+        elevation="8"
+        height="90"
+        max-width="85"
+      > <div class="text-center rounded-lg">
+    <v-avatar class="avatar_hcard_2 rounded-lg"
+      tile height="90" width="85"
+    >
+      <v-icon dark size="40">
+        mdi-account-key
+      </v-icon>
+    </v-avatar>
+  </div>  </v-card>   <v-card
+        class="mx-1"
+        height="170"
+        max-width="400"
+      >
+            <div class="text-end pt-3 pr-3">
+     <p class="header_title">Applicant</p>
+ <h3 class="text">2</h3>
+<div class="mt-8">
+<v-divider class="ml-4 "></v-divider>
+ <p class="text-center mt-2  sub_title">Total Number of Applicant</p>
+</div>
+    </div>
+      </v-card>
+
+  </v-col>
+       <v-col
+          cols="12"
+          sm="6"
+          lg="3"
+        >
+ <v-card light
+        class="mb-n16 mx-6 rounded-lg" style="z-index:1"
+        elevation="8"
+        height="90"
+        max-width="85"
+      > <div class="text-center rounded-lg">
+    <v-avatar class="avatar_hcard_3 rounded-lg"
+      tile height="90" width="85"
+    >
+      <v-icon dark size="40">
+        mdi-bell
+      </v-icon>
+    </v-avatar>
+     </div> </v-card>   <v-card
+        class="mx-1"
+        height="170"
+        max-width="400"
+      >
+           <div class="text-end pt-3 pr-3">
+     <p class="header_title">Notifications</p>
+    <h3 class="text">0</h3>
+  <div class="mt-8">
+   <v-divider class="ml-4 "></v-divider>
+    <a><p style="color:teal" class="text-end mt-2  sub_title">View</p></a>
+   </div>
+    </div>
+      </v-card>
+
+   </v-col>
+   <v-col
+          cols="12"
+          sm="6"
+          lg="3"
+        >
+ <v-card light
+        class="mb-n16 mx-6 rounded-lg" style="z-index:1"
+        elevation="8"
+        height="90"
+        max-width="85"
+      > <div class="text-center rounded-lg">
+    <v-avatar class="avatar_hcard_4 rounded-lg"
+      tile height="90" width="85"
+    >
+      <v-icon dark size="40">
+        mdi-information-outline
+      </v-icon>
+    </v-avatar>
+  </div>  </v-card>   <v-card
+        class="mx-1"
+        height="170"
+        max-width="400"
+      >
+    <div class="text-end pt-3 pr-4">
+     <p class="header_title">About</p>
+     <v-btn dark class="teal" >About</v-btn>    
+    </div>
+
+      </v-card>
+
+    </v-col>
+          </v-row>   
+         <v-row>
+         <v-col cols="12" sm="6">
+<v-card dark
+        class="mb-n12 mx-5 hcard_1" style="z-index:1"
+        elevation="8"
+        height="70" 
+        max-width="100%" 
+      >  
+      <v-card-text class="font" style="color:white" >Employees Stats</v-card-text>
+       </v-card>  
+      <v-card
+        class="mx-1"
+        height="370"
+        max-width="100%"
+      >
+        
+      </v-card>
+         </v-col>
+ <v-col cols="12" sm="6">
+<v-card dark
+        class="mb-n12 mx-5 hcard_2" style="z-index:1"
+        elevation="8"
+        height="70"
+        max-width="100%"
+      >  
+      <v-card-text class="font" style="color:white">Applicant Stats</v-card-text>
+       </v-card>  
+      <v-card
+        class="mx-1"
+        height="370"
+        max-width="100%"
+      >
+       
+      </v-card>
+         </v-col>
+         </v-row>
+        </v-container>
+      </v-main>
+
+    </v-app>
+  </v-app>
+</div>
+</template>
+<script>
+import appbar from './content/appbar'
+import navbar from './content/navbar'
+export default {
+name: 'Home',
+
+components:{
+navbar,
+appbar,
+},
+data () {
+      return {
+
+              drawer: null,
+  breadcombs: [
+        {
+          text: 'Home',
+          disabled: false,
+          href: '#/home',
+        },
+        
+      ],
+
+      }
+
+    },
+
+
+   }
+
+</script>
+
+<style>
+
+</style>
+
+
+
+
+
+
+
+
+
+my style nav bar
+<template>
+    
+
+
+
+    <v-navigation-drawer app v-model="drawer" color="teal" expand-on-hover class="navigation_drawer">
+
+         <v-list dark color="teal lighten-1" >
+            <v-list-item class="px-2">
+              <v-list-item-avatar>
+                 <v-img src="@/assets/ak.jpg"></v-img>
+              </v-list-item-avatar>
+            </v-list-item>
+  
+            <v-list-item link>
+              <v-list-item-content>
+                <v-list-item-title class="header_title">
+                  Ak Ashok
+                </v-list-item-title>
+                <v-list-item-subtitle class="sub_title"><strong> askvictory2007@gmail.com </strong> </v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+             <v-list dense  elevation="3" class="grey lighten-3">
+<v-list-item
+           v-for="item in items" :key="item.title" :to="item.link"
+            link
+            class="my-6 "
+            >
+
+             <v-list-item-icon>
+              <v-icon>{{item.icon}}</v-icon>
+            </v-list-item-icon>
+  
+            <v-list-item-content>
+              <v-list-item-title class="nav_bar"> {{item.title}}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+   <template v-for="item in items2">
+            <v-row
+              v-if="item.heading"
+              :key="item.heading"
+              align="center"
+            >
+              <v-col cols="6">
+                <v-subheader v-if="item.heading">
+                  {{ item.heading }}
+                </v-subheader>
+              </v-col>
+              <v-col
+                cols="6"
+                class="text-center"
+              >
+               
+              </v-col>
+            </v-row>
+
+            <v-list-group
+              v-else-if="item.children"
+              :key="item.text"
+              v-model="item.model"
+             :prepend-icon="item.model ? item.icon : item['icon-alt']"
+              append-icon=""
+            >
+
+              <template v-slot:activator>
+
+                <v-list-item-content>
+                  <v-list-item-title class="nav_bar">
+                    {{ item.text }}
+                  </v-list-item-title>
+                </v-list-item-content>
+
+              </template>
+              <v-list-item
+                v-for="(child, i) in item.children"
+                :key="i"
+                 :to="child.link"
+                link
+              >
+                <v-list-item-action v-if="child.icon">
+                  <v-icon >{{ child.icon }}</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title class="nav_bar">
+                    {{ child.text }}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+
+            </v-list-group>
+    
+          </template>
+ 
+<v-list-item
+           v-for="item in items3" :key="item.title" :to="item.link"
+            link
+            class="my-6"
+            >
+             <v-list-item-icon>
+              <v-icon>{{item.icon}}</v-icon>
+            </v-list-item-icon>
+  
+            <v-list-item-content>
+              <v-list-item-title class="nav_bar">{{item.title}}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+             <template v-for="item in items4">
+            <v-row
+              v-if="item.heading"
+              :key="item.heading"
+              align="center"
+            >
+              <v-col cols="6">
+                <v-subheader v-if="item.heading">
+                  {{ item.heading }}
+                </v-subheader>
+              </v-col>
+              <v-col
+                cols="6"
+                class="text-center"
+              >
+               
+              </v-col>
+            </v-row>
+
+            <v-list-group
+              v-else-if="item.children"
+              :key="item.text"
+              v-model="item.model"
+             :prepend-icon="item.model ? item.icon : item['icon-alt']"
+              append-icon=""
+            >
+
+              <template v-slot:activator>
+
+                <v-list-item-content>
+                  <v-list-item-title class="nav_bar">
+                    {{ item.text }}
+                  </v-list-item-title>
+                </v-list-item-content>
+
+              </template>
+              <v-list-item
+                v-for="(child, i) in item.children"
+                :key="i"
+                 :to="child.link"
+                link
+              >
+                <v-list-item-action v-if="child.icon">
+                  <v-icon >{{ child.icon }}</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title class="nav_bar">
+                    {{ child.text }}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+
+            </v-list-group>
+    
+          </template>
+
+          <v-list-item :elevation="hover ? 12 : 2"
+           v-for="item in items5" :key="item.title" :to="item.link"
+            link
+            class="my-6"
+            >
+             <v-list-item-icon>
+              <v-icon>{{item.icon}}</v-icon>
+            </v-list-item-icon>
+  
+            <v-list-item-content>
+              <v-list-item-title class="nav_bar">{{item.title}}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+        </v-list>
+
+
+
+
+        </v-navigation-drawer>
+    
+
+</template>
+<script>
+export default {
+    name: 'navbar',
+    data() {
+        return {
+            drawer: false,
+             sheet: false,
+              menu: false,
+              menuu:false,
+              hover:'',
+            items: [
+                { title: 'Home', 
+                icon: 'mdi-home-city',
+                link:'/home' },
+                { title: 'Employee Details', 
+                icon: 'mdi-account-settings',
+                 link:'/employee' },
+
+ 
+            ],
+            
+ items2:[
+ {
+        icon: 'mdi-chevron-up',
+        'icon-alt': 'mdi-chevron-down',
+        text: 'Leave Management System',
+        model: false,
+        children: [
+          { icon: 'mdi-account-plus', text: 'Apply Leave', link:'/ApplyLeave'  },
+ 
+        ],
+      },
+ ],
+ items3:[
+{ title: 'Salary Calculation', 
+                icon: 'mdi-contrast-box',
+                link:'' },
+{ title: 'Income Tax File Processtem', 
+                icon: 'mdi-bank',
+                link:'' },
+ ],
+ items4: [
+
+      {
+        icon: 'mdi-chevron-up',
+        'icon-alt': 'mdi-chevron-down',
+        text: 'Applicant Details',
+        model: false,
+        children: [
+          { icon: 'mdi-account-plus', text: 'Basic Info', link:'/applicant'  },
+ { icon: 'mdi-account-network', text: 'Management Details ', link:'/applicantdata'  },
+        ],
+      },],
+
+  items5: [
+                { title: 'Settings', 
+                icon: 'mdi-wrench',
+                link:'' },],
+        
+            
+            
+        }
+    },
+}
+</script>
+<style>
+.v-list-group--active,.v-list-item--active{
+color: teal !important;
+}
+
+</style>
